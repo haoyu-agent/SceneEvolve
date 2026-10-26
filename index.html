@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction</title>
+  <meta name="description" content="SceneEvolve develops an evolving harness framework that enables a compact open-source model to GPT-6-Astra-level performance in code-driven reconstruction of editable, compositional, and executable 3D scenes.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-content">
+      <a href="#hero" class="nav-logo">
+        <span class="nav-logo-img media-placeholder logo-placeholder" aria-hidden="true"></span>
+        <span>SceneEvolve</span>
+      </a>
+      <div class="nav-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#streaming">Streaming</a>
+        <a href="#comparison">Comparisons</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section id="hero" class="hero-section">
+    <canvas id="particle-canvas"></canvas>
+    <div class="hero-content fade-in">
+      <!-- <div class="hero-badge">Arxiv 2026</div> -->
+      <span class="hero-logo media-placeholder logo-placeholder" aria-hidden="true"></span>
+      <h1 class="hero-title">
+        <span class="gradient-text">SceneEvolve</span>
+      </h1>
+      <p class="hero-subtitle">Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction</p>
+      <div class="hero-authors" aria-label="Authors and affiliation">
+        <div class="author-line">
+          <a href="https://github.com/haoyu-agent" target="_blank" rel="noopener">Haoyu Yao<sup>1</sup></a>
+          <a href="https://chenguolin.github.io/" target="_blank" rel="noopener">Chenguo Lin<sup>1,†</sup></a>
+          <span class="author-name">Ruize Du<sup>1</sup></span>
+          <a href="http://www.muyadong.com" target="_blank" rel="noopener">Yadong Mu<sup>1,‡</sup></a>
+        </div>
+        <div class="author-notes">† Project lead&nbsp;&nbsp; ‡ Corresponding author</div>
+        <div class="affiliation-line"><sup>1</sup> <a href="https://english.pku.edu.cn/" target="_blank" rel="noopener">Peking University</a></div>
+      </div>
+      <p class="hero-desc">Developing an evolving harness framework that enables a compact open-source model to GPT-6-Astra-level performance in code-driven reconstruction of editable, compositional, and executable 3D scenes.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Paper
+        </a>
+        <a href="https://github.com/haoyu-agent/SceneEvolve" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          Github
+        </a>
+        <a href="#" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Video
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- Section 2: Abstract -->
+  <section id="abstract" class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">
+        <span class="gradient-text">Abstract</span>
+      </h2>
+      <div class="abstract-card glass-card fade-in">
+        <p>
+          Reconstructing editable and compositional 3D scenes from a real image requires jointly reasoning about geometry, object structure, and spatial relationships. We introduce <strong class="highlight">SceneEvolve</strong>, a framework that represents 3D scenes as executable code and improves reconstruction by evolving the harness around a small open-source agent.
+        </p>
+        <p>
+          <strong class="highlight">SceneEvolve</strong> combines <strong class="highlight">SceneAct</strong>, a compositional semantic action interface built on parameterized primitives, hierarchical composition, and semantic spatial relations, with <strong class="highlight">SceneHarness-RSI</strong>, which leverages a stronger teacher agent to iteratively evolve the harness using feedback from development-set reconstructions. Throughout harness evolution, the model parameters, action semantics, and execution backend remain fixed. The resulting harness provides a reusable reconstruction procedure that enables the small open-source model to reconstruct unseen scenes without parameter updates or teacher assistance.
+        </p>
+        <p>
+          Across two in-domain datasets and one out-of-domain dataset, <strong class="highlight">SceneEvolve</strong> with the comparatively compact <strong class="highlight">Qwen3.8-27B</strong> model improves all four evaluated reconstruction metrics while reducing mean inference time by 47.0% relative to the base model. More notably, despite relying on a substantially smaller model, SceneEvolve achieves 32.3% higher reconstruction quality than the large proprietary <strong class="highlight">GPT-5.6-Sol</strong> model, while reducing mean equivalent deployment cost by 59.8%. Furthermore, the harness evolved using Qwen3.8-27B also generalizes to <strong class="highlight">Kimi-K3</strong>, achieving comparable reconstruction performance to <strong class="highlight">GPT-6-Astra</strong>.
+        </p>
+      </div>
+      <div class="highlights-grid fade-in">
+        <div class="highlight-item glass-card">
+          <div class="highlight-icon">🚀</div>
+          <div class="highlight-label">Higher Quality</div>
+          <div class="highlight-desc">SceneEvolve with Qwen3.8-27B can outperform GPT-5.6-Sol</div>
+        </div>
+        <div class="highlight-item glass-card">
+          <div class="highlight-icon">⚡️</div>
+          <div class="highlight-label">Faster Inference</div>
+          <div class="highlight-desc">SceneEvolve with Qwen3.8-27B reduces inference time by 32% v.s. Qwen3.8-27B.</div>
+        </div>
+        <div class="highlight-item glass-card">
+          <div class="highlight-icon">💵</div>
+          <div class="highlight-label">Less Cost</div>
+          <div class="highlight-desc">SceneEvolve with Qwen3.8-27B reduces cost by 78% v.s. GPT-6-Astra.</div>
+        </div>
+        <div class="highlight-item glass-card">
+          <div class="highlight-icon">🏅</div>
+          <div class="highlight-label">Transferablility</div>
+          <div class="highlight-desc">Kimi-K3 with an evolved harness on Qwen2.8-27B matches GPT-6-Astra.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Method -->
+  <section id="method" class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">
+        <span class="gradient-text">Method</span>
+      </h2>
+      <p class="section-desc fade-in">SceneEvolve consists of two core components: ①SceneAct, a compact semantic interface from intent to actions; ②SceneHarness-RSI, a teacher-guided recursive harness evolution framework. 
+        ③Experiments show that SceneEvolve improves the baseline, surpasses frontier models, and reduces inference time and cost.
+      </p>
+
+      <div class="method-diagram fade-in">
+        <img src="figures/method.png" alt="SceneEvolve Method Overview" class="method-img">
+      </div>
+
+      <div class="method-cards fade-in">
+        <div class="method-card glass-card">
+          <div class="method-card-number">01</div>
+          <h3>SceneAct</h3>
+          <p>The SceneAct comprises three abstractions: parameterized primitives, hierarchical composition, and semantic spatial relations, which defines the executable interface for frozen student.</p>
+        </div>
+        <div class="method-card glass-card">
+          <div class="method-card-number">02</div>
+          <h3>SceneHarness-RSI</h3>
+          <p>SceneHarness-RSI iteratively refines the harness through a propose-execute-evaluate-retain cycle to improve how the student uses SceneAct while keeping the student parameters fixed.</p>
+        </div>
+        <div class="method-card glass-card">
+          <div class="method-card-number">03</div>
+          <h3>Performance</h3>
+          <p>SceneEvolve with Qwen3.8-27B outperforms GPT-5.6-Sol in quality while reducing costs by 59.8% and time by 47.0%. The evolved harness transferring to Kimi-K3 almost compete with GPT-6-Astra.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4: Results -->
+  <section id="results" class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">
+        <span class="gradient-text">Results</span>
+      </h2>
+      <p class="section-desc fade-in">Across in-domain and out-of-domain datasets, SceneEvolve with Qwen3.8-27B outperforms GPT-5.6-Sol, reducing cost by 59.8% and inference time by 47.0% relative to the baseline. The evolved harness also transfers to Kimi-K3, achieving results competitive with GPT-6-Astra and demonstrating its transferability.</p>
+
+      <h3 class="results-subtitle fade-in">Quantitative Results</h3>
+      <!-- Quantitative Results Table -->
+      <div class="comparison-block fade-in">
+        <p class="table-caption">Performance comparison across ScanNet and CA-1M (in-domain) and ARKitScenes (out-of-domain). We report PSNR, SSIM, LPIPS, and DINOv2 similarity. The best and second results are highlighted in bold and underlined.</p>
+        <div class="table-wrapper glass-card">
+          <table class="results-table">
+            <caption class="sr-only">Table 1. Quantitative comparison across three datasets.</caption>
+            <colgroup><col class="model-col"><col class="effort-col"><col span="12" class="metric-col"></colgroup>
+            <thead>
+              <tr><th colspan="2"></th><th colspan="8" class="dataset-group in-domain">In-domain</th><th colspan="4" class="dataset-group out-domain">Out-of-domain</th></tr>
+              <tr><th>Model</th><th>Inference effort</th><th colspan="4" class="dataset-name">ScanNet</th><th colspan="4" class="dataset-name">CA-1M</th><th colspan="4" class="dataset-name">ARKitScenes</th></tr>
+              <tr><th></th><th></th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>DINOv2-S ↑</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>DINOv2-S ↑</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>DINOv2-S ↑</th></tr>
+            </thead>
+            <tbody>
+              <tr class="gpt-astra"><td><span class="model-name"><img src="figures/gpt-teal.png" alt="">GPT-6-Astra</span></td><td>High</td><td>10.063</td><td>0.386</td><td>0.684</td><td>0.590</td><td>10.309</td><td>0.382</td><td>0.705</td><td>0.556</td><td>9.561</td><td>0.407</td><td>0.748</td><td>0.519</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gpt-teal.png" alt="">GPT-6-Astra</span></td><td>Medium</td><td>10.143</td><td>0.383</td><td>0.684</td><td>0.579</td><td>10.433</td><td>0.378</td><td>0.711</td><td>0.557</td><td>10.177</td><td>0.423</td><td>0.732</td><td>0.528</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gpt-teal.png" alt="">GPT-6-Astra</span></td><td>Low</td><td>9.888</td><td>0.385</td><td>0.701</td><td>0.596</td><td>10.108</td><td>0.372</td><td>0.691</td><td>0.552</td><td>10.245</td><td>0.403</td><td>0.712</td><td>0.475</td></tr>
+              <tr class="section-divider"><td colspan="14"></td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/claude-orange.png" alt="">Claude-Opus-5</span></td><td>High</td><td>9.174</td><td>0.352</td><td>0.735</td><td>0.438</td><td>8.781</td><td>0.368</td><td>0.749</td><td>0.441</td><td>8.551</td><td>0.389</td><td>0.751</td><td><span class="second">0.417</span></td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/claude-orange.png" alt="">Claude-Opus-5</span></td><td>Medium</td><td>9.021</td><td>0.348</td><td>0.741</td><td><span class="second">0.444</span></td><td>8.705</td><td>0.361</td><td>0.756</td><td>0.432</td><td>8.498</td><td>0.392</td><td>0.754</td><td>0.409</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/claude-orange.png" alt="">Claude-Opus-5</span></td><td>Low</td><td>8.742</td><td>0.337</td><td>0.747</td><td>0.416</td><td>8.566</td><td>0.355</td><td>0.753</td><td>0.419</td><td>8.287</td><td>0.374</td><td>0.764</td><td>0.391</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/claude-orange.png" alt="">Claude-Opus-5</span></td><td>None</td><td>8.463</td><td>0.329</td><td>0.759</td><td>0.398</td><td>8.318</td><td>0.346</td><td>0.769</td><td>0.423</td><td>8.146</td><td>0.358</td><td>0.771</td><td>0.356</td></tr>
+              <tr class="section-divider"><td colspan="14"></td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gpt-teal.png" alt="">GPT-5.6-Sol</span></td><td>High</td><td>9.042</td><td>0.337</td><td>0.742</td><td>0.417</td><td>8.562</td><td>0.353</td><td>0.748</td><td>0.428</td><td>8.312</td><td>0.371</td><td>0.755</td><td>0.401</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gpt-teal.png" alt="">GPT-5.6-Sol</span></td><td>Medium</td><td>8.731</td><td>0.319</td><td>0.754</td><td>0.375</td><td>7.821</td><td>0.347</td><td>0.765</td><td>0.411</td><td>8.027</td><td>0.340</td><td>0.752</td><td>0.408</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gpt-teal.png" alt="">GPT-5.6-Sol</span></td><td>Low</td><td>7.945</td><td>0.307</td><td>0.756</td><td>0.382</td><td>8.294</td><td>0.338</td><td>0.757</td><td>0.416</td><td>7.942</td><td>0.314</td><td>0.776</td><td>0.349</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gpt-teal.png" alt="">GPT-5.6-Sol</span></td><td>None</td><td>7.755</td><td>0.284</td><td>0.752</td><td>0.389</td><td>8.212</td><td>0.321</td><td>0.770</td><td>0.361</td><td>8.067</td><td>0.356</td><td>0.773</td><td>0.357</td></tr>
+              <tr class="section-divider"><td colspan="14"></td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gemini-blue.png" alt="">Gemini-Flash-3.8</span></td><td>High</td><td>8.126</td><td>0.318</td><td>0.774</td><td>0.358</td><td>8.113</td><td>0.324</td><td>0.781</td><td>0.365</td><td>7.984</td><td>0.337</td><td>0.785</td><td>0.341</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gemini-blue.png" alt="">Gemini-Flash-3.8</span></td><td>Medium</td><td>8.004</td><td>0.311</td><td>0.782</td><td>0.361</td><td>8.154</td><td>0.319</td><td>0.779</td><td>0.358</td><td>7.846</td><td>0.330</td><td>0.792</td><td>0.334</td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/gemini-blue.png" alt="">Gemini-Flash-3.8</span></td><td>Low</td><td>7.813</td><td>0.298</td><td>0.789</td><td>0.337</td><td>7.874</td><td>0.306</td><td>0.795</td><td>0.341</td><td>7.731</td><td>0.332</td><td>0.799</td><td>0.336</td></tr>
+              <tr class="section-divider"><td colspan="14"></td></tr>
+              <tr class="ours-row"><td><span class="model-name"><img src="figures/qwen-violet.png" alt="">Qwen3.8-27B</span></td><td>xHigh</td><td>9.061</td><td>0.376</td><td>0.772</td><td>0.240</td><td>8.381</td><td>0.367</td><td>0.806</td><td>0.134</td><td>9.704</td><td>0.448</td><td>0.785</td><td>0.219</td></tr>
+              <tr class="ours-row ours-highlight"><td><span class="model-name"><img src="figures/qwen-violet.png" alt=""><strong>Qwen3.8-27B w/ Ours</strong></span></td><td>xHigh</td><td>9.124</td><td><span class="second">0.378</span></td><td>0.755</td><td>0.391</td><td>8.513</td><td><span class="second">0.440</span></td><td><span class="second">0.742</span></td><td>0.418</td><td><span class="second">9.862</span></td><td><span class="second">0.453</span></td><td><span class="second">0.721</span></td><td>0.368</td></tr>
+              <tr class="improvement-row"><td><em>Improvement</em></td><td>—</td><td>+0.70%</td><td>+0.53%</td><td>−2.20%</td><td>+62.92%</td><td>+1.57%</td><td>+19.89%</td><td>−7.94%</td><td>+211.94%</td><td>+1.63%</td><td>+1.12%</td><td>−8.15%</td><td>+68.04%</td></tr>
+              <tr class="section-divider"><td colspan="14"></td></tr>
+              <tr class=""><td><span class="model-name"><img src="figures/kimi.png" alt="">Kimi-K3</span></td><td>High</td><td><span class="second">9.181</span></td><td>0.350</td><td><span class="second">0.734</span></td><td>0.437</td><td><span class="second">8.847</span></td><td>0.365</td><td>0.756</td><td><span class="second">0.458</span></td><td>8.603</td><td>0.384</td><td>0.758</td><td>0.392</td></tr>
+              <tr class="kimi-highlight"><td><span class="model-name"><img src="figures/kimi.png" alt=""><strong>Kimi-K3 w/ Ours</strong></span></td><td>High</td><td><strong>9.547</strong></td><td><strong>0.381</strong></td><td><strong>0.712</strong></td><td><strong>0.513</strong></td><td><strong>9.718</strong></td><td><strong>0.454</strong></td><td><strong>0.722</strong></td><td><strong>0.534</strong></td><td><strong>10.029</strong></td><td><strong>0.469</strong></td><td><strong>0.716</strong></td><td><strong>0.504</strong></td></tr>
+              <tr class="improvement-row"><td><em>Improvement</em></td><td>—</td><td>+3.99%</td><td>+8.86%</td><td>−3.00%</td><td>+17.39%</td><td>+9.85%</td><td>+24.38%</td><td>−4.50%</td><td>+16.59%</td><td>+16.58%</td><td>+22.14%</td><td>−5.54%</td><td>+28.57%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h3 class="results-subtitle fade-in">Qualitative Results</h3>
+      <p class="subsection-desc fade-in">Qualitative comparisons of indoor scene reconstruction with GPT-6-Astra, GPT-5.6-Sol, Qwen3.8-27B and Kimi-K3 on Scannet, CA-1M and ARKitScenes datasets.</p>
+
+      <div class="tabs result-tabs fade-in">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="scene1">Scene 1</button>
+          <button class="tab-btn" data-tab="scene2">Scene 2</button>
+          <button class="tab-btn" data-tab="scene3">Scene 3</button>
+          <button class="tab-btn" data-tab="scene4">Scene 4</button>
+          <button class="tab-btn" data-tab="scene5">Scene 5</button>
+        </div>
+
+        <div class="tab-content active" id="tab-scene1">
+          <div class="tab-desc">
+           
+          </div>
+          <div class="results-grid">
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Reference</figcaption>
+              <img src="figures/vis/scene1_ref.png" alt="Scene 1 — Reference image">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-6-Astra</figcaption>
+              <img src="figures/vis/scene1_astra.png" alt="Scene 1 — GPT-6-Astra result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-5.6-Sol</figcaption>
+              <img src="figures/vis/scene1_sol.png" alt="Scene 1 — GPT-5.6-Sol result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B</figcaption>
+              <img src="figures/vis/scene1_qwen.png" alt="Scene 1 — Qwen3.8-27B result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B w/ Ours</figcaption>
+              <img src="figures/vis/scene1_qwen_wours.png" alt="Scene 1 — Qwen3.8-27B with our method">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3</figcaption>
+              <img src="figures/vis/scene1_kimi.png" alt="Scene 1 — Kimi-K3 result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3 w/ Ours</figcaption>
+              <img src="figures/vis/scene1_kimi_wours.png" alt="Scene 1 — Kimi-K3 with our method">
+            </figure>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-scene2">
+          <div class="tab-desc">
+          </div>
+           
+          <div class="results-grid">
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Reference</figcaption>
+              <img src="figures/vis/scene2_ref.png" alt="Scene 2 — Reference image">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-6-Astra</figcaption>
+              <img src="figures/vis/scene2_astra.png" alt="Scene 2 — GPT-6-Astra result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-5.6-Sol</figcaption>
+              <img src="figures/vis/scene2_sol.png" alt="Scene 2 — GPT-5.6-Sol result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B</figcaption>
+              <img src="figures/vis/scene2_qwen.png" alt="Scene 2 — Qwen3.8-27B result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B w/ Ours</figcaption>
+              <img src="figures/vis/scene2_qwen_wours.png" alt="Scene 2 — Qwen3.8-27B with our method">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3</figcaption>
+              <img src="figures/vis/scene2_kimi.png" alt="Scene 2 — Kimi-K3 result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3 w/ Ours</figcaption>
+              <img src="figures/vis/scene2_kimi_wours.png" alt="Scene 2 — Kimi-K3 with our method">
+            </figure>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-scene3">
+          <div class="results-grid">
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Reference</figcaption>
+              <img src="figures/vis/scene3_ref.png" alt="Scene 3 — Reference image">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-6-Astra</figcaption>
+              <img src="figures/vis/scene3_astra.png" alt="Scene 3 — GPT-6-Astra result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-5.6-Sol</figcaption>
+              <img src="figures/vis/scene3_sol.png" alt="Scene 3 — GPT-5.6-Sol result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B</figcaption>
+              <img src="figures/vis/scene3_qwen.png" alt="Scene 3 — Qwen3.8-27B result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B w/ Ours</figcaption>
+              <img src="figures/vis/scene3_qwen_wours.png" alt="Scene 3 — Qwen3.8-27B with our method">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3</figcaption>
+              <img src="figures/vis/scene3_kimi.png" alt="Scene 3 — Kimi-K3 result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3 w/ Ours</figcaption>
+              <img src="figures/vis/scene3_kimi_wours.png" alt="Scene 3 — Kimi-K3 with our method">
+            </figure>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-scene4">
+          <div class="results-grid">
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Reference</figcaption>
+              <img src="figures/vis/scene4_ref.png" alt="Scene 4 — Reference image">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-6-Astra</figcaption>
+              <img src="figures/vis/scene4_astra.png" alt="Scene 4 — GPT-6-Astra result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-5.6-Sol</figcaption>
+              <img src="figures/vis/scene4_sol.png" alt="Scene 4 — GPT-5.6-Sol result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B</figcaption>
+              <img src="figures/vis/scene4_qwen.png" alt="Scene 4 — Qwen3.8-27B result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B w/ Ours</figcaption>
+              <img src="figures/vis/scene4_qwen_wours.png" alt="Scene 4 — Qwen3.8-27B with our method">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3</figcaption>
+              <img src="figures/vis/scene4_kimi.png" alt="Scene 4 — Kimi-K3 result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3 w/ Ours</figcaption>
+              <img src="figures/vis/scene4_kimi_wours.png" alt="Scene 4 — Kimi-K3 with our method">
+            </figure>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-scene5">
+          <div class="results-grid">
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Reference</figcaption>
+              <img src="figures/vis/scene5_ref.png" alt="Scene 5 — Reference image">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-6-Astra</figcaption>
+              <img src="figures/vis/scene5_astra.png" alt="Scene 5 — GPT-6-Astra result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">GPT-5.6-Sol</figcaption>
+              <img src="figures/vis/scene5_sol.png" alt="Scene 5 — GPT-5.6-Sol result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B</figcaption>
+              <img src="figures/vis/scene5_qwen.png" alt="Scene 5 — Qwen3.8-27B result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Qwen3.8-27B w/ Ours</figcaption>
+              <img src="figures/vis/scene5_qwen_wours.png" alt="Scene 5 — Qwen3.8-27B with our method">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3</figcaption>
+              <img src="figures/vis/scene5_kimi.png" alt="Scene 5 — Kimi-K3 result">
+            </figure>
+            <figure class="result-card glass-card">
+              <figcaption class="result-label">Kimi-K3 w/ Ours</figcaption>
+              <img src="figures/vis/scene5_kimi_wours.png" alt="Scene 5 — Kimi-K3 with our method">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <h3 id="comparison" class="results-subtitle fade-in">Comparisons</h3>
+      <p class="subsection-desc fade-in">We evaluate SceneEvolve on three in-domain and out-of-domain datasets, and benchmark proprietary multimodal models as zero-shot agents for compositional image-to-3D scene reconstruction.</p>
+      <div class="paper-figures">
+        <figure class="paper-figure glass-card fade-in">
+          <img src="figures/1.png" alt="Figure 3 — Mean reconstruction quality, inference time, and equivalent cost comparison">
+          <figcaption>Figure 3. Mean reconstruction quality, inference time, and equivalent deployment cost compared with the base model and frontier models.</figcaption>
+        </figure>
+        <figure class="paper-figure glass-card fade-in">
+          <img src="figures/3.png" alt="Figure 4 — Quality-efficiency and quality-cost trade-offs">
+          <figcaption>Figure 4. Reconstruction quality compared with inference time and equivalent deployment cost across model configurations.</figcaption>
+        </figure>
+        <figure class="paper-figure glass-card fade-in">
+          <img src="figures/2.png" alt="Figure 5 — Dataset-level reconstruction quality, inference time, and cost">
+          <figcaption>Figure 5. Comparison of SceneEvolve with Qwen3.8-27B, GPT-5.6-Sol, and GPT-6-Astra on ScanNet, CA-1M and ARKitScenes.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Interactive Streaming -->
+  <section id="streaming" class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">
+        <span class="gradient-text">Interactive Streaming Demo</span>
+      </h2>
+
+      <div class="streaming-demo fade-in">
+        <div class="streaming-card glass-card scene-stream-card">
+          <div class="streaming-card-head">
+            <div>
+              <div class="streaming-badge">Interactive scene streaming · local assets</div>
+              <h3 class="comparison-title">Astra vs Kimi-K3 vs Kimi-K3 w/ Ours</h3>
+              <p class="streaming-lede">Drag the timeline or press play to scrub all three reconstructions together. Hover a panel to inspect the active scene and use the Astra viewport to orbit the editable 3D asset.</p>
+            </div>
+            <div class="streaming-actions">
+              <button class="stream-control" id="scene-play" type="button" aria-pressed="false">▶ Play comparison</button>
+              <a class="stream-file-link" href="data/living_room_glbs.zip" download>Download</a>
+            </div>
+          </div>
+
+          <div class="scene-compare" data-scene-player>
+            <article class="scene-panel scene-panel-astra is-active" data-scene="astra">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-astra"></span><span>GPT-6-Astra</span><span class="scene-file">living_room_astra.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="astra" src="data/living_room_astra.glb" poster="data/living_room_astra_poster.png" camera-controls shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0m 1.05m 0m" camera-orbit="0deg 76deg 4.2m" min-camera-orbit="-18deg 58deg 3.2m" max-camera-orbit="18deg 88deg 5.1m" alt="Interactive Astra living room scene"></model-viewer>
+                <div class="scene-overlay">Drag to orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="kimi">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-kimi"></span><span>Kimi-K3</span><span class="scene-file">living_room_kimi.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="kimi" src="data/living_room_kimi.glb" poster="data/living_room_kimi_poster.png" camera-controls shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0m 1.05m 0m" camera-orbit="0deg 76deg 4.2m" min-camera-orbit="-16deg 58deg 3.2m" max-camera-orbit="16deg 88deg 5.1m" alt="Interactive Kimi-K3 living room scene"></model-viewer>
+                <div class="scene-overlay">Drag to orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="ours">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-ours"></span><span>Kimi-K3 w/ Ours</span><span class="scene-file">living_room_kimi_wours.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="ours" data-camera-yaw="180" src="data/living_room_kimi_wours.glb" poster="data/living_room_kimi_wours_poster.png" camera-controls shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0m 1.05m 0m" camera-orbit="180deg 76deg 4.2m" min-camera-orbit="164deg 58deg 3.2m" max-camera-orbit="196deg 88deg 5.1m" alt="Interactive Kimi-K3 with Ours living room scene"></model-viewer>
+                <div class="scene-overlay">Drag to orbit · scroll to zoom</div>
+              </div>
+            </article>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Section 8: Footer / BibTeX -->
+  <section id="citation" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title fade-in">
+        <span class="gradient-text">Citation</span>
+      </h2>
+      <div class="bibtex-card glass-card fade-in">
+        <div class="bibtex-header">
+          <span>BibTeX</span>
+          <button class="copy-btn" id="copy-bibtex" title="Copy to clipboard">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre class="bibtex-code"><code>@inproceedings{SceneEvolve2026,
+  title     = {Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction},
+  author    = {Yao Haoyu, Lin Chenguo, Du Ruize, Mu Yadong},
+  year      = {2026}
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <span class="footer-logo-img media-placeholder logo-placeholder" aria-hidden="true"></span>
+          <span>SceneEvolve</span>
+        </div>
+        <p class="footer-text">Interactive Video Generation with Online 4D Control</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
+<script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
