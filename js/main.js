@@ -277,58 +277,67 @@
 
 /* ========== Interactive scene streaming comparison ========== */
 (function () {
-  const player = document.querySelector('[data-scene-player]');
-  const scrubber = document.getElementById('scene-scrubber');
-  const frameLabel = document.getElementById('scene-frame');
-  const playButton = document.getElementById('scene-play');
-  const steps = document.querySelectorAll('[data-scene-step]');
-  if (!player || !scrubber || !playButton) return;
-
-  const panels = [...player.querySelectorAll('.scene-panel')];
-  let timer = null;
-  function setFrame(frame) {
-    const safeFrame = Math.max(0, Math.min(4, Number(frame) || 0));
-    scrubber.value = String(safeFrame * 25);
-    frameLabel.textContent = String(safeFrame + 1).padStart(2, '0');
-    steps.forEach((step, index) => step.classList.toggle('active', index === safeFrame));
-    panels.forEach((panel) => panel.classList.toggle('is-active', safeFrame === 0 || panel.dataset.scene === 'ours'));
-  }
-  function stop() {
-    if (timer) window.clearInterval(timer);
-    timer = null;
-    playButton.textContent = '▶ Play comparison';
-    playButton.setAttribute('aria-pressed', 'false');
-  }
-  playButton.addEventListener('click', () => {
-    if (timer) { stop(); return; }
-    playButton.textContent = 'Ⅱ Pause comparison';
-    playButton.setAttribute('aria-pressed', 'true');
-    timer = window.setInterval(() => {
-      const next = Number(scrubber.value) + 5;
-      if (next >= 100) { setFrame(0); stop(); return; }
-      scrubber.value = String(next);
-      setFrame(Math.round(next / 25));
-    }, 180);
-  });
-  scrubber.addEventListener('input', () => setFrame(Math.round(Number(scrubber.value) / 25)));
-  steps.forEach((step) => step.addEventListener('click', () => { stop(); setFrame(step.dataset.sceneStep); }));
-  setFrame(0);
-})();
-
-/* Keep the three model viewers moving through a small indoor-only camera arc. */
-(function () {
   const viewers = [...document.querySelectorAll('.scene-model')];
+  const playButton = document.getElementById('scene-play');
   if (!viewers.length) return;
+  let playing = true;
   let t = 0;
-  function animateIndoorCamera() {
-    t += 0.012;
-    const yaw = Math.sin(t) * 8;
-    viewers.forEach((viewer) => {
-      if (viewer.cameraOrbit) {
-        const baseYaw = Number(viewer.dataset.cameraYaw || 0);
-        viewer.cameraOrbit = `${(baseYaw + yaw).toFixed(2)}deg 76deg 4.2m`;
-      }
+  const inspecting = new Set();
+  // Synchronized rows share viewing direction, lens, orbit motion and input.
+  // Per-model targets and base distances preserve each scene’s framing.
+  const syncedViewers = new Set();
+  const syncedRows = [...document.querySelectorAll('[data-sync-camera]')].map((row) => {
+    const models = [...row.querySelectorAll('.scene-model')];
+    const state = { yaw: 0, motion: 0, pitch: 0, radius: 0 };
+    function applyCamera(source) {
+      models.forEach((model) => {
+        if (model === source) return;
+        const yaw = Number(model.dataset.cameraYaw) + state.yaw + state.motion;
+        model.cameraOrbit = `${yaw}deg ${Number(model.dataset.cameraPitch) + state.pitch}deg ${Number(model.dataset.cameraRadius) + state.radius}m`;
+        if (source) model.jumpCameraToGoal();
+      });
+    }
+    models.forEach((model) => {
+      syncedViewers.add(model);
+      model.addEventListener('camera-change', (event) => {
+        if (event.detail.source !== 'user-interaction') return;
+        const orbit = model.getCameraOrbit();
+        state.yaw = orbit.theta * 180 / Math.PI - Number(model.dataset.cameraYaw) - state.motion;
+        state.pitch = orbit.phi * 180 / Math.PI - Number(model.dataset.cameraPitch);
+        state.radius = orbit.radius - Number(model.dataset.cameraRadius);
+        applyCamera(model);
+      });
     });
+    return { models, state, applyCamera };
+  });
+  viewers.forEach((viewer) => {
+    viewer.addEventListener('pointerenter', () => inspecting.add(viewer));
+    viewer.addEventListener('pointerleave', () => inspecting.delete(viewer));
+    viewer.addEventListener('focusin', () => inspecting.add(viewer));
+    viewer.addEventListener('focusout', () => inspecting.delete(viewer));
+  });
+  if (playButton) playButton.addEventListener('click', () => {
+    playing = !playing;
+    playButton.textContent = playing ? 'Ⅱ Pause comparison' : '▶ Play comparison';
+    playButton.setAttribute('aria-pressed', String(playing));
+  });
+  function animateIndoorCamera() {
+    if (playing) {
+      t += 0.012;
+      const yaw = Math.sin(t) * 8;
+      syncedRows.forEach(({ models, state, applyCamera }) => {
+        if (models.some((model) => inspecting.has(model))) return;
+        state.motion = yaw;
+        applyCamera();
+      });
+      viewers.forEach((viewer) => {
+        if (!viewer.cameraOrbit || inspecting.has(viewer) || syncedViewers.has(viewer)) return;
+        const baseYaw = Number(viewer.dataset.cameraYaw || 0);
+        const pitch = Number(viewer.dataset.cameraPitch || 76);
+        const radius = Number(viewer.dataset.cameraRadius || 4.2);
+        viewer.cameraOrbit = `${(baseYaw + yaw).toFixed(2)}deg ${pitch}deg ${radius}m`;
+      });
+    }
     requestAnimationFrame(animateIndoorCamera);
   }
   animateIndoorCamera();

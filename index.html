@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction</title>
   <meta name="description" content="SceneEvolve develops an evolving harness framework that enables a compact open-source model to GPT-6-Astra-level performance in code-driven reconstruction of editable, compositional, and executable 3D scenes.">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=bedroom-1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,9 +20,9 @@
       </a>
       <div class="nav-links">
         <a href="#abstract">Abstract</a>
+        <a href="#streaming">Demos</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
-        <a href="#streaming">Streaming</a>
         <a href="#comparison">Comparisons</a>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           Paper
         </a>
-        <a href="https://github.com/haoyu-agent/SceneEvolve" class="btn btn-secondary">
+        <a href="https://github.com/haoyu-agent/SceneEvolve_Code" class="btn btn-secondary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           Github
         </a>
@@ -95,12 +95,12 @@
         <div class="highlight-item glass-card">
           <div class="highlight-icon">⚡️</div>
           <div class="highlight-label">Faster Inference</div>
-          <div class="highlight-desc">SceneEvolve with Qwen3.8-27B reduces inference time by 32% v.s. Qwen3.8-27B.</div>
+          <div class="highlight-desc">SceneEvolve with Qwen3.8-27B reduces inference time by 32% vs. Qwen3.8-27B.</div>
         </div>
         <div class="highlight-item glass-card">
           <div class="highlight-icon">💵</div>
           <div class="highlight-label">Less Cost</div>
-          <div class="highlight-desc">SceneEvolve with Qwen3.8-27B reduces cost by 78% v.s. GPT-6-Astra.</div>
+          <div class="highlight-desc">SceneEvolve with Qwen3.8-27B reduces cost by 78% vs. GPT-6-Astra.</div>
         </div>
         <div class="highlight-item glass-card">
           <div class="highlight-icon">🏅</div>
@@ -111,7 +111,150 @@
     </div>
   </section>
 
-  <!-- Section 3: Method -->
+  <!-- Section 3: Interactive Demo -->
+  <section id="streaming" class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">
+        <span class="gradient-text">Interactive Demos</span>
+      </h2>
+
+      <div class="streaming-demo fade-in">
+        <div class="streaming-card glass-card scene-stream-card">
+          <div class="streaming-card-head">
+            <div>
+              <div class="streaming-badge">Interactive scenes</div>
+              <h3 class="comparison-title">The Frontier vs. Compact Open-Source Models with SceneEvolve</h3>
+              <p class="streaming-lede">Compare each reference image with three interactive reconstructions. Drag a model to orbit, scroll to zoom, or pause the shared camera motion to inspect.</p>
+              <p class="streaming-lede"><strong class="highlight">“Ours” denotes the harness evolved with Qwen3.8-27B.</strong></p>
+            </div>
+            <div class="streaming-actions">
+              <button class="stream-control" id="scene-play" type="button" aria-pressed="true">Ⅱ Pause comparison</button>
+              <a class="stream-file-link" href="data/living_room_glbs.zip" download>Download</a>
+            </div>
+          </div>
+
+          <h4 class="scene-row-title">Scene 1 · Bedroom</h4>
+          <div class="scene-compare" data-scene-player data-sync-camera aria-label="Bedroom comparison: reference, Astra, Kimi K3.1 Pro, and Kimi K3.1 Pro with Ours">
+            <article class="scene-panel scene-reference">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-reference"></span><span>Reference</span></div>
+              <div class="scene-viewport"><img src="data/bedroom/bedroom.png" alt="Reference photograph of the bedroom" loading="lazy"></div>
+            </article>
+            <article class="scene-panel" data-scene="astra">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-astra"></span><span>GPT-6-Astra</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="bedroom-astra" src="data/bedroom/astra.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="-0.7481m 0.6895m -3.26793m" camera-orbit="15.46911deg 78.59532deg 4.2m" field-of-view="57.71132deg" min-field-of-view="57.71132deg" max-field-of-view="57.71132deg" data-camera-yaw="15.46911" data-camera-pitch="78.59532" data-camera-radius="4.2" min-camera-orbit="-0.5308899999999994deg 60deg 3.2m" max-camera-orbit="31.46911deg 90deg 5.2m" alt="Interactive GPT-6-Astra bedroom scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="kimi">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-kimi"></span><span>Kimi K3.1 Pro</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="bedroom-kimi" src="data/bedroom/kimik3.1.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="-0.7481m 0.6895m -3.26793m" camera-orbit="15.46911deg 78.59532deg 4.2m" field-of-view="57.71132deg" min-field-of-view="57.71132deg" max-field-of-view="57.71132deg" data-camera-yaw="15.46911" data-camera-pitch="78.59532" data-camera-radius="4.2" min-camera-orbit="-0.5308899999999994deg 60deg 3.2m" max-camera-orbit="31.46911deg 90deg 5.2m" alt="Interactive Kimi K3.1 Pro bedroom scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="ours">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-ours"></span><span>Kimi K3.1 Pro w/ Ours</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="bedroom-ours" src="data/bedroom/kimik3.1_wours.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="1.6519m 0.7395m -2.76793m" camera-orbit="15.46911deg 78.59532deg 4.2m" field-of-view="57.71132deg" min-field-of-view="57.71132deg" max-field-of-view="57.71132deg" data-camera-yaw="15.46911" data-camera-pitch="78.59532" data-camera-radius="4.2" min-camera-orbit="-0.5308899999999994deg 60deg 3.2m" max-camera-orbit="31.46911deg 90deg 5.2m" alt="Interactive Kimi K3.1 Pro w/ Ours bedroom scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+          </div>
+
+          <h4 class="scene-row-title">Scene 2 · Table</h4>
+          <div class="scene-compare" data-scene-player data-sync-camera aria-label="Table comparison: reference, Astra, Kimi K3.1 Pro, and Kimi K3.1 Pro with Ours">
+            <article class="scene-panel scene-reference">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-reference"></span><span>Reference</span></div>
+              <div class="scene-viewport"><img src="data/table/ref.jpg" alt="Reference photograph of the desk beside a window" loading="lazy"></div>
+            </article>
+            <article class="scene-panel" data-scene="astra">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-astra"></span><span>GPT-6-Astra</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="table-astra" src="data/table/astra.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0.01m 0.36099m -0.12132m" camera-orbit="0deg 60.9deg 3m" field-of-view="43.93173deg" min-field-of-view="43.93173deg" max-field-of-view="43.93173deg" data-camera-yaw="0" data-camera-pitch="60.9" data-camera-radius="3" min-camera-orbit="-16deg 43deg 2m" max-camera-orbit="16deg 79deg 4m" alt="Interactive GPT-6-Astra table scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="kimi">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-kimi"></span><span>Kimi K3.1 Pro</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="table-kimi" src="data/table/kimik3.1.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="0.65" environment-image="neutral" camera-target="0.01m 0.36099m -0.12132m" camera-orbit="0deg 60.9deg 3m" field-of-view="43.93173deg" min-field-of-view="43.93173deg" max-field-of-view="43.93173deg" data-camera-yaw="0" data-camera-pitch="60.9" data-camera-radius="3" min-camera-orbit="-16deg 43deg 2m" max-camera-orbit="16deg 79deg 4m" alt="Interactive Kimi K3.1 Pro table scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="ours">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-ours"></span><span>Kimi K3.1 Pro w/ Ours</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="table-ours" src="data/table/kimik3.1_wours.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0.01m 0.36099m -0.12132m" camera-orbit="0deg 60.9deg 3.45m" field-of-view="43.93173deg" min-field-of-view="43.93173deg" max-field-of-view="43.93173deg" data-camera-yaw="0" data-camera-pitch="60.9" data-camera-radius="3.45" min-camera-orbit="-16deg 43deg 2.45m" max-camera-orbit="16deg 79deg 4.45m" alt="Interactive Kimi K3.1 Pro w/ Ours table scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+          </div>
+
+          <h4 class="scene-row-title">Scene 3 · Living room</h4>
+          <div class="scene-compare" data-scene-player data-sync-camera aria-label="Scene 3 comparison">
+            <article class="scene-panel scene-reference">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-reference"></span><span>Reference</span></div>
+              <div class="scene-viewport"><img src="data/living_room.png" alt="Reference photograph of the first living room" loading="lazy"></div>
+            </article>
+            <article class="scene-panel scene-panel-astra is-active" data-scene="astra">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-astra"></span><span>GPT-6-Astra</span><span class="scene-file">living_room_astra.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="astra" src="data/living_room_astra.glb" poster="data/living_room_astra_poster.png" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0m 1.05m 0m" camera-orbit="0deg 76deg 4.2m" data-camera-yaw="0" data-camera-pitch="76" data-camera-radius="4.2" min-camera-orbit="-16deg 58deg 3.2m" max-camera-orbit="16deg 88deg 5.1m" alt="Interactive Astra living room scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="kimi">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-kimi"></span><span>Kimi-K3</span><span class="scene-file">living_room_kimi.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="kimi" src="data/living_room_kimi.glb" poster="data/living_room_kimi_poster.png" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0m 1.05m 0m" camera-orbit="0deg 76deg 4.2m" data-camera-yaw="0" data-camera-pitch="76" data-camera-radius="4.2" min-camera-orbit="-16deg 58deg 3.2m" max-camera-orbit="16deg 88deg 5.1m" alt="Interactive Kimi-K3 living room scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="ours">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-ours"></span><span>Kimi-K3 w/ Ours</span><span class="scene-file">living_room_kimi_wours.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="ours" src="data/living_room_kimi_wours.glb" poster="data/living_room_kimi_wours_poster.png" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="0.4" environment-image="neutral" camera-target="0m 0.8m -1m" camera-orbit="0deg 76deg 4.2m" data-camera-yaw="0" data-camera-pitch="76" data-camera-radius="4.2" min-camera-orbit="-16deg 58deg 3.2m" max-camera-orbit="16deg 88deg 5.1m" alt="Interactive Kimi-K3 with Ours living room scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+          </div>
+
+          <h4 class="scene-row-title">Scene 4 · Clustered Dining</h4>
+          <div class="scene-compare" data-scene-player data-sync-camera aria-label="Scene 4 comparison">
+            <article class="scene-panel scene-reference">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-reference"></span><span>Reference</span></div>
+              <div class="scene-viewport"><img src="data/room2/7.png" alt="Reference photograph of the second living room and kitchen" loading="lazy"></div>
+            </article>
+            <article class="scene-panel" data-scene="astra">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-astra"></span><span>GPT-6-Astra</span><span class="scene-file">astra.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="room2-astra" src="data/room2/astra.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="-0.0627m 1.2532m 1.4517m" camera-orbit="-0.2387deg 81.0029deg 5m" field-of-view="53.1301deg" data-camera-yaw="-0.2387" data-camera-pitch="81.0029" data-camera-radius="5" min-camera-orbit="-16.2387deg 63.0029deg 4m" max-camera-orbit="15.7613deg 93.0029deg 6m" alt="Interactive GPT-6-Astra second living room and kitchen scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="kimi">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-kimi"></span><span>Kimi-K3</span><span class="scene-file">kimi.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="room2-kimi" src="data/room2/kimi.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0.1018m 1.3632m 2.3549m" camera-orbit="-0.7073deg 87.3142deg 5m" field-of-view="58.7155deg" data-camera-yaw="-0.7073" data-camera-pitch="87.3142" data-camera-radius="5" min-camera-orbit="-16.7073deg 69.3142deg 4m" max-camera-orbit="15.2927deg 99.3142deg 6m" alt="Interactive Kimi-K3 second living room and kitchen scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+            <article class="scene-panel" data-scene="ours">
+              <div class="scene-panel-header"><span class="scene-model-dot dot-ours"></span><span>Kimi-K3 w/ Ours</span><span class="scene-file">kimi_wours.glb</span></div>
+              <div class="scene-viewport">
+                <model-viewer class="scene-model" data-model="room2-ours" src="data/room2/kimi_wours.glb" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="0.0038" environment-image="neutral" camera-target="-0.6500m 1.0195m -2.9640m" camera-orbit="0.0deg 76.5deg 5m" field-of-view="53.9917deg" data-camera-yaw="0.0" data-camera-pitch="76.5" data-camera-radius="5" min-camera-orbit="-16deg 58.5deg 4m" max-camera-orbit="16deg 88.5deg 6m" alt="Interactive Kimi-K3 w/ Ours second living room and kitchen scene"></model-viewer>
+                <div class="scene-overlay">Synced orbit · scroll to zoom</div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Method -->
   <section id="method" class="section">
     <div class="container">
       <h2 class="section-title fade-in">
@@ -146,7 +289,7 @@
     </div>
   </section>
 
-  <!-- Section 4: Results -->
+  <!-- Section 5: Results -->
   <section id="results" class="section">
     <div class="container">
       <h2 class="section-title fade-in">
@@ -401,55 +544,7 @@
     </div>
   </section>
 
-  <!-- Section 5: Interactive Streaming -->
-  <section id="streaming" class="section">
-    <div class="container">
-      <h2 class="section-title fade-in">
-        <span class="gradient-text">Interactive Streaming Demo</span>
-      </h2>
 
-      <div class="streaming-demo fade-in">
-        <div class="streaming-card glass-card scene-stream-card">
-          <div class="streaming-card-head">
-            <div>
-              <div class="streaming-badge">Interactive scene streaming · local assets</div>
-              <h3 class="comparison-title">Astra vs Kimi-K3 vs Kimi-K3 w/ Ours</h3>
-              <p class="streaming-lede">Drag the timeline or press play to scrub all three reconstructions together. Hover a panel to inspect the active scene and use the Astra viewport to orbit the editable 3D asset.</p>
-            </div>
-            <div class="streaming-actions">
-              <button class="stream-control" id="scene-play" type="button" aria-pressed="false">▶ Play comparison</button>
-              <a class="stream-file-link" href="data/living_room_glbs.zip" download>Download</a>
-            </div>
-          </div>
-
-          <div class="scene-compare" data-scene-player>
-            <article class="scene-panel scene-panel-astra is-active" data-scene="astra">
-              <div class="scene-panel-header"><span class="scene-model-dot dot-astra"></span><span>GPT-6-Astra</span><span class="scene-file">living_room_astra.glb</span></div>
-              <div class="scene-viewport">
-                <model-viewer class="scene-model" data-model="astra" src="data/living_room_astra.glb" poster="data/living_room_astra_poster.png" camera-controls shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0m 1.05m 0m" camera-orbit="0deg 76deg 4.2m" min-camera-orbit="-18deg 58deg 3.2m" max-camera-orbit="18deg 88deg 5.1m" alt="Interactive Astra living room scene"></model-viewer>
-                <div class="scene-overlay">Drag to orbit · scroll to zoom</div>
-              </div>
-            </article>
-            <article class="scene-panel" data-scene="kimi">
-              <div class="scene-panel-header"><span class="scene-model-dot dot-kimi"></span><span>Kimi-K3</span><span class="scene-file">living_room_kimi.glb</span></div>
-              <div class="scene-viewport">
-                <model-viewer class="scene-model" data-model="kimi" src="data/living_room_kimi.glb" poster="data/living_room_kimi_poster.png" camera-controls shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0m 1.05m 0m" camera-orbit="0deg 76deg 4.2m" min-camera-orbit="-16deg 58deg 3.2m" max-camera-orbit="16deg 88deg 5.1m" alt="Interactive Kimi-K3 living room scene"></model-viewer>
-                <div class="scene-overlay">Drag to orbit · scroll to zoom</div>
-              </div>
-            </article>
-            <article class="scene-panel" data-scene="ours">
-              <div class="scene-panel-header"><span class="scene-model-dot dot-ours"></span><span>Kimi-K3 w/ Ours</span><span class="scene-file">living_room_kimi_wours.glb</span></div>
-              <div class="scene-viewport">
-                <model-viewer class="scene-model" data-model="ours" data-camera-yaw="180" src="data/living_room_kimi_wours.glb" poster="data/living_room_kimi_wours_poster.png" camera-controls shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="0m 1.05m 0m" camera-orbit="180deg 76deg 4.2m" min-camera-orbit="164deg 58deg 3.2m" max-camera-orbit="196deg 88deg 5.1m" alt="Interactive Kimi-K3 with Ours living room scene"></model-viewer>
-                <div class="scene-overlay">Drag to orbit · scroll to zoom</div>
-              </div>
-            </article>
-          </div>
-  
-        </div>
-      </div>
-    </div>
-  </section>
 
 
   <!-- Section 8: Footer / BibTeX -->
@@ -487,7 +582,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=table-distance-1"></script>
 </body>
 </html>
 <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
