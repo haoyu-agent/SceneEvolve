@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction</title>
   <meta name="description" content="SceneEvolve develops an evolving harness framework that enables a compact open-source model to GPT-6-Astra-level performance in code-driven reconstruction of editable, compositional, and executable 3D scenes.">
-  <link rel="stylesheet" href="css/style.css?v=bedroom-1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=video-style-1">
+  <link rel="stylesheet" href="css/video-theme.css?v=30">
+  <link rel="stylesheet" href="css/benchmark.css?v=3">
+  <link rel="preload" href="assets/fonts/nunito-600.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/dm-sans-400.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css?v=1">
 </head>
 <body>
   <!-- Navigation -->
@@ -30,27 +32,25 @@
 
   <!-- Section 1: Hero -->
   <section id="hero" class="hero-section">
-    <canvas id="particle-canvas"></canvas>
+    <div class="hero-layout">
     <div class="hero-content fade-in">
       <!-- <div class="hero-badge">Arxiv 2026</div> -->
-      <span class="hero-logo media-placeholder logo-placeholder" aria-hidden="true"></span>
-      <h1 class="hero-title">
-        <span class="gradient-text">SceneEvolve</span>
-      </h1>
-      <p class="hero-subtitle">Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction</p>
+      <p class="hero-eyebrow">SceneEvolve</p>
+      <h1 class="hero-title">Learning to<br>Code the World<span class="title-period">.</span></h1>
+      <p class="hero-subtitle">Harness Evolution for Compositional 3D Reconstruction</p>
       <div class="hero-authors" aria-label="Authors and affiliation">
         <div class="author-line">
           <a href="https://github.com/haoyu-agent/" target="_blank" rel="noopener">Haoyu Yao<sup>1</sup></a>
           <a href="https://chenguolin.github.io/" target="_blank" rel="noopener">Chenguo Lin<sup>1,†</sup></a>
-          <a href="https://github.com/drz123456789/" target="_blank" rel="noopener">Ruize Du<sup>1</sup></span>
+          <a href="https://github.com/drz123456789/" target="_blank" rel="noopener">Ruize Du<sup>1</sup></a>
           <a href="http://www.muyadong.com" target="_blank" rel="noopener">Yadong Mu<sup>1,‡</sup></a>
         </div>
         <div class="author-notes">† Project lead&nbsp;&nbsp; ‡ Corresponding author</div>
         <div class="affiliation-line"><sup>1</sup> <a href="https://english.pku.edu.cn/" target="_blank" rel="noopener">Peking University</a></div>
       </div>
-      <p class="hero-desc">Developing an evolving harness framework that enables a compact open-source model to GPT-6-Astra-level performance in code-driven reconstruction of editable, compositional, and executable 3D scenes.</p>
+      <!-- <p class="hero-desc">Developing an evolving harness framework that enables a compact open-source model to GPT-6-Astra-level performance in code-driven reconstruction of editable, compositional, and executable 3D scenes.</p> -->
       <div class="hero-buttons">
-        <a href="#" class="btn btn-primary">
+        <a href="https://arxiv.org/abs/2610.37046" class="btn btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           Paper
         </a>
@@ -64,9 +64,20 @@
         </a>
       </div>
     </div>
-    <div class="hero-scroll-indicator">
-      <div class="scroll-arrow"></div>
+      <figure class="hero-scene fade-in">
+        <div class="hero-scene-stage">
+          <model-viewer id="hero-model" min-field-of-view="57.71132deg" max-field-of-view="57.71132deg" src="data/bedroom/kimik3.1_wours.glb" poster="assets/bedroom-preview.webp" camera-controls interaction-prompt="none" disable-pan touch-action="pan-y" shadow-intensity="1" exposure="1.05" environment-image="neutral" camera-target="1.6519m 0.7395m -2.76793m" camera-orbit="15.46911deg 78.59532deg 4.2m" field-of-view="57.71132deg" min-camera-orbit="-0.53deg 60deg 3.2m" max-camera-orbit="31.47deg 90deg 5.2m" alt="Interactive bedroom reconstructed with SceneEvolve">
+            <img slot="poster" class="hero-scene-poster" src="assets/bedroom-preview.webp" alt="Bedroom reconstruction preview">
+          </model-viewer>
+          <a class="hero-reference" href="#streaming" aria-label="Explore the reference image and reconstructions">
+            <img src="data/bedroom/bedroom.png" alt="Reference bedroom photograph">
+            <span>Reference</span>
+          </a>
+        </div>
+        <figcaption>Bedroom / Kimi K3.1 Pro + SceneEvolve <span>Drag to explore ↗</span></figcaption>
+      </figure>
     </div>
+    <a class="hero-scroll-indicator" href="#abstract" aria-label="Scroll to abstract"><div class="scroll-arrow"></div></a>
   </section>
 
   <!-- Section 2: Abstract -->
@@ -89,22 +100,22 @@
       <div class="highlights-grid fade-in">
         <div class="highlight-item glass-card">
           <div class="highlight-icon">🚀</div>
-          <div class="highlight-label">Higher Quality</div>
+          <div class="highlight-label">Higher Quality </div>
           <div class="highlight-desc">SceneEvolve with Qwen3.8-27B can outperform GPT-5.6-Sol</div>
         </div>
         <div class="highlight-item glass-card">
           <div class="highlight-icon">⚡️</div>
-          <div class="highlight-label">Faster Inference</div>
+          <div class="highlight-label">Faster Inference </div>
           <div class="highlight-desc">SceneEvolve with Qwen3.8-27B reduces inference time by 32% vs. Qwen3.8-27B.</div>
         </div>
         <div class="highlight-item glass-card">
           <div class="highlight-icon">💵</div>
-          <div class="highlight-label">Less Cost</div>
+          <div class="highlight-label">Less Cost </div>
           <div class="highlight-desc">SceneEvolve with Qwen3.8-27B reduces cost by 78% vs. GPT-6-Astra.</div>
         </div>
         <div class="highlight-item glass-card">
           <div class="highlight-icon">🏅</div>
-          <div class="highlight-label">Transferablility</div>
+          <div class="highlight-label">Transferablility </div>
           <div class="highlight-desc">Kimi-K3 with an evolved harness on Qwen2.8-27B matches GPT-6-Astra.</div>
         </div>
       </div>
@@ -122,14 +133,10 @@
         <div class="streaming-card glass-card scene-stream-card">
           <div class="streaming-card-head">
             <div>
-              <div class="streaming-badge">Interactive scenes</div>
+        
               <h3 class="comparison-title">The Frontier vs. Compact Open-Source Models with SceneEvolve</h3>
               <p class="streaming-lede">Compare each reference image with three interactive reconstructions. Drag a model to orbit, scroll to zoom, or pause the shared camera motion to inspect.</p>
-              <p class="streaming-lede"><strong class="highlight">“Ours” denotes the harness evolved with Qwen3.8-27B.</strong></p>
-            </div>
-            <div class="streaming-actions">
-              <button class="stream-control" id="scene-play" type="button" aria-pressed="true">Ⅱ Pause comparison</button>
-              <a class="stream-file-link" href="data/living_room_glbs.zip" download>Download</a>
+             <p class="streaming-lede">“Ours” denotes the harness evolved with Qwen3.8-27B.</p>
             </div>
           </div>
 
@@ -260,8 +267,8 @@
       <h2 class="section-title fade-in">
         <span class="gradient-text">Method</span>
       </h2>
-      <p class="section-desc fade-in">SceneEvolve consists of two core components: ①SceneAct, a compact semantic interface from intent to actions; ②SceneHarness-RSI, a teacher-guided recursive harness evolution framework. 
-        ③Experiments show that SceneEvolve improves the baseline, surpasses frontier models, and reduces inference time and cost.
+      <p class="section-desc fade-in"><strong class="highlight">SceneEvolve</strong> consists of two core components: <strong class="highlight">①SceneAct</strong>, a compact semantic interface from intent to actions; <strong class="highlight">②SceneHarness-RSI</strong>, a teacher-guided recursive harness evolution framework. 
+        <strong class="highlight">③Experiments</strong> show that SceneEvolve improves the baseline, surpasses frontier models, and reduces inference time and cost.
       </p>
 
       <div class="method-diagram fade-in">
@@ -270,18 +277,24 @@
 
       <div class="method-cards fade-in">
         <div class="method-card glass-card">
-          <div class="method-card-number">01</div>
-          <h3>SceneAct</h3>
+          <div class="method-card-header">
+            <div class="method-card-number">01</div>
+            <h3>SceneAct</h3>
+          </div>
           <p>The SceneAct comprises three abstractions: parameterized primitives, hierarchical composition, and semantic spatial relations, which defines the executable interface for frozen student.</p>
         </div>
         <div class="method-card glass-card">
-          <div class="method-card-number">02</div>
-          <h3>SceneHarness-RSI</h3>
+          <div class="method-card-header">
+            <div class="method-card-number">02</div>
+            <h3>SceneHarness-RSI</h3>
+          </div>
           <p>SceneHarness-RSI iteratively refines the harness through a propose-execute-evaluate-retain cycle to improve how the student uses SceneAct while keeping the student parameters fixed.</p>
         </div>
         <div class="method-card glass-card">
-          <div class="method-card-number">03</div>
-          <h3>Performance</h3>
+          <div class="method-card-header">
+            <div class="method-card-number">03</div>
+            <h3>Performance</h3>
+          </div>
           <p>SceneEvolve with Qwen3.8-27B outperforms GPT-5.6-Sol in quality while reducing costs by 59.8% and time by 47.0%. The evolved harness transferring to Kimi-K3 almost compete with GPT-6-Astra.</p>
         </div>
       </div>
@@ -295,20 +308,30 @@
       <h2 class="section-title fade-in">
         <span class="gradient-text">Results</span>
       </h2>
-      <p class="section-desc fade-in">Across in-domain and out-of-domain datasets, SceneEvolve with Qwen3.8-27B outperforms GPT-5.6-Sol, reducing cost by 59.8% and inference time by 47.0% relative to the baseline. The evolved harness also transfers to Kimi-K3, achieving results competitive with GPT-6-Astra and demonstrating its transferability.</p>
+      <p class="section-desc fade-in">Across in-domain and out-of-domain datasets, <strong class="highlight">SceneEvolve with Qwen3.8-27B outperforms GPT-5.6-Sol</strong>, <strong class="highlight">reducing cost by 59.8%</strong> and <strong class="highlight">inference time by 47.0%</strong> relative to the baseline. <strong class="highlight">The evolved harness also transfers to Kimi-K3</strong>, achieving results competitive with <strong class="highlight">GPT-6-Astra</strong> and demonstrating its transferability.</p>
 
       <h3 class="results-subtitle fade-in">Quantitative Results</h3>
       <!-- Quantitative Results Table -->
       <div class="comparison-block fade-in">
         <p class="table-caption">Performance comparison across ScanNet and CA-1M (in-domain) and ARKitScenes (out-of-domain). We report PSNR, SSIM, LPIPS, and DINOv2 similarity. The best and second results are highlighted in bold and underlined.</p>
         <div class="table-wrapper glass-card">
-          <table class="results-table">
+          <div class="benchmark-toolbar">
+            <div class="benchmark-label"><span class="benchmark-status" aria-hidden="true"></span>Reconstruction benchmark</div>
+            <div class="dataset-filters" role="group" aria-label="Filter benchmark by dataset">
+              <button type="button" class="dataset-filter active" data-dataset="all" aria-pressed="true">All datasets</button>
+              <button type="button" class="dataset-filter" data-dataset="scannet" aria-pressed="false">ScanNet</button>
+              <button type="button" class="dataset-filter" data-dataset="ca1m" aria-pressed="false">CA-1M</button>
+              <button type="button" class="dataset-filter" data-dataset="arkit" aria-pressed="false">ARKitScenes</button>
+            </div>
+          </div>
+          <div class="table-scroll" role="region" aria-label="Quantitative results across all models and metrics.">
+          <table class="results-table" data-dataset="all">
             <caption class="sr-only">Table 1. Quantitative comparison across three datasets.</caption>
             <colgroup><col class="model-col"><col class="effort-col"><col span="12" class="metric-col"></colgroup>
             <thead>
-              <tr><th colspan="2"></th><th colspan="8" class="dataset-group in-domain">In-domain</th><th colspan="4" class="dataset-group out-domain">Out-of-domain</th></tr>
-              <tr><th>Model</th><th>Inference effort</th><th colspan="4" class="dataset-name">ScanNet</th><th colspan="4" class="dataset-name">CA-1M</th><th colspan="4" class="dataset-name">ARKitScenes</th></tr>
-              <tr><th></th><th></th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>DINOv2-S ↑</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>DINOv2-S ↑</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th><th>DINOv2-S ↑</th></tr>
+              <tr><th rowspan="3" scope="col" class="model-heading">Model</th><th rowspan="3" scope="col" class="effort-heading">Inference<br>effort</th><th colspan="8" class="dataset-group in-domain" data-domain="in">In-domain</th><th colspan="4" class="dataset-group out-domain" data-domain="out">Out-of-domain</th></tr>
+              <tr><th colspan="4" scope="colgroup" class="dataset-name" data-table-dataset="scannet">ScanNet</th><th colspan="4" scope="colgroup" class="dataset-name" data-table-dataset="ca1m">CA-1M</th><th colspan="4" scope="colgroup" class="dataset-name" data-table-dataset="arkit">ARKitScenes</th></tr>
+              <tr><th scope="col" data-table-dataset="scannet">PSNR ↑</th><th scope="col" data-table-dataset="scannet">SSIM ↑</th><th scope="col" data-table-dataset="scannet">LPIPS ↓</th><th scope="col" data-table-dataset="scannet">DINOv2-S ↑</th><th scope="col" data-table-dataset="ca1m">PSNR ↑</th><th scope="col" data-table-dataset="ca1m">SSIM ↑</th><th scope="col" data-table-dataset="ca1m">LPIPS ↓</th><th scope="col" data-table-dataset="ca1m">DINOv2-S ↑</th><th scope="col" data-table-dataset="arkit">PSNR ↑</th><th scope="col" data-table-dataset="arkit">SSIM ↑</th><th scope="col" data-table-dataset="arkit">LPIPS ↓</th><th scope="col" data-table-dataset="arkit">DINOv2-S ↑</th></tr>
             </thead>
             <tbody>
               <tr class="gpt-astra"><td><span class="model-name"><img src="figures/gpt-teal.png" alt="">GPT-6-Astra</span></td><td>High</td><td>10.063</td><td>0.386</td><td>0.684</td><td>0.590</td><td>10.309</td><td>0.382</td><td>0.705</td><td>0.556</td><td>9.561</td><td>0.407</td><td>0.748</td><td>0.519</td></tr>
@@ -338,6 +361,11 @@
               <tr class="improvement-row"><td><em>Improvement</em></td><td>—</td><td>+3.99%</td><td>+8.86%</td><td>−3.00%</td><td>+17.39%</td><td>+9.85%</td><td>+24.38%</td><td>−4.50%</td><td>+16.59%</td><td>+16.58%</td><td>+22.14%</td><td>−5.54%</td><td>+28.57%</td></tr>
             </tbody>
           </table>
+          </div>
+          <div class="benchmark-footer">
+            <span class="benchmark-legend"><i aria-hidden="true"></i>With evolved harness</span>
+            <span class="benchmark-hint">Bold: best · Underline: second</span>
+          </div>
         </div>
       </div>
 
@@ -525,21 +553,38 @@
         </div>
       </div>
 
-      <h3 id="comparison" class="results-subtitle fade-in">Comparisons</h3>
+    </div>
+  </section>
+
+  <!-- Comparisons -->
+  <section id="comparison" class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">
+        <span class="gradient-text">Comparisons</span>
+      </h2>
       <p class="subsection-desc fade-in">We evaluate SceneEvolve on three in-domain and out-of-domain datasets, and benchmark proprietary multimodal models as zero-shot agents for compositional image-to-3D scene reconstruction.</p>
       <div class="paper-figures">
-        <figure class="paper-figure glass-card fade-in">
+        <div class="comparison-figure-group">
+          <p class="figure-summary subsection-desc fade-in"><strong class="highlight"><span class="comparison-number">① Better quality with less time and cost.</span> </strong> The evolved harness improves Qwen3.8-27B reconstruction quality while reducing mean inference time and equivalent deployment cost. SceneEvolve also exceeds GPT-5.6-Sol in average DINOv2 similarity at a lower deployment cost.</p>
+          <figure class="paper-figure glass-card fade-in">
           <img src="figures/1.png" alt="Figure 3 — Mean reconstruction quality, inference time, and equivalent cost comparison">
           <figcaption>Figure 3. Mean reconstruction quality, inference time, and equivalent deployment cost compared with the base model and frontier models.</figcaption>
-        </figure>
-        <figure class="paper-figure glass-card fade-in">
+          </figure>
+        </div>
+        <div class="comparison-figure-group">
+          <p class="figure-summary subsection-desc fade-in"><strong><span class="comparison-number">② Stronger quality–efficiency balance.</span></strong> Each point represents a model configuration, comparing reconstruction quality against inference time or equivalent deployment cost. SceneEvolve moves the base Qwen3.8-27B model toward higher quality, faster inference, and lower cost.</p>
+          <figure class="paper-figure glass-card fade-in">
           <img src="figures/3.png" alt="Figure 4 — Quality-efficiency and quality-cost trade-offs">
           <figcaption>Figure 4. Reconstruction quality compared with inference time and equivalent deployment cost across model configurations.</figcaption>
-        </figure>
-        <figure class="paper-figure glass-card fade-in">
+          </figure>
+        </div>
+        <div class="comparison-figure-group">
+          <p class="figure-summary subsection-desc fade-in"><strong><span class="comparison-number">③ Consistent gains across three datasets.</span></strong> On ScanNet, CA-1M, and ARKitScenes, SceneEvolve improves the base model’s reconstruction quality while reducing inference time and equivalent cost. Its DINOv2 similarity matches or exceeds GPT-5.6-Sol across all three datasets, with lower deployment cost.</p>
+          <figure class="paper-figure glass-card fade-in">
           <img src="figures/2.png" alt="Figure 5 — Dataset-level reconstruction quality, inference time, and cost">
           <figcaption>Figure 5. Comparison of SceneEvolve with Qwen3.8-27B, GPT-5.6-Sol, and GPT-6-Astra on ScanNet, CA-1M and ARKitScenes.</figcaption>
-        </figure>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
@@ -561,10 +606,14 @@
             <span>Copy</span>
           </button>
         </div>
-        <pre class="bibtex-code"><code>@inproceedings{SceneEvolve2026,
-  title     = {Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction},
-  author    = {Yao Haoyu, Lin Chenguo, Du Ruize, Mu Yadong},
-  year      = {2026}
+        <pre class="bibtex-code"><code>@misc{yao2026learningcodeworldharness,
+      title={Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction}, 
+      author={Haoyu Yao and Chenguo Lin and Ruize Du and Yadong Mu},
+      year={2026},
+      eprint={2610.37046},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2610.37046}, 
 }</code></pre>
       </div>
     </div>
@@ -582,7 +631,8 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=table-distance-1"></script>
+  <div class="reading-rail" aria-hidden="true"><span>Learning to Code the World</span><div class="reading-track"><div id="reading-progress"></div></div><span>Peking University</span></div>
+  <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+  <script src="js/main.js?v=hero-motion-4"></script>
 </body>
 </html>
-<script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
